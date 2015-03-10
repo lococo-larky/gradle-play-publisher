@@ -22,8 +22,10 @@ class PlayPublisherPluginTest {
         Project project = TestHelper.evaluatableProject()
         project.evaluate()
 
-        assertNotNull(project.tasks.publishRelease)
-        assertEquals(project.tasks.publishApkRelease.variant, project.android.applicationVariants[1])
+        project.afterEvaluate {
+            assertNotNull(project.tasks.publishRelease)
+            assertEquals(project.tasks.publishApkRelease.variant, project.android.applicationVariants[1])
+        }
     }
 
     @Test
@@ -37,11 +39,13 @@ class PlayPublisherPluginTest {
 
         project.evaluate()
 
-        assertNotNull(project.tasks.publishPaidRelease)
-        assertNotNull(project.tasks.publishFreeRelease)
+        project.afterEvaluate {
+            assertNotNull(project.tasks.publishPaidRelease)
+            assertNotNull(project.tasks.publishFreeRelease)
 
-        assertEquals(project.tasks.publishApkFreeRelease.variant, project.android.applicationVariants[3])
-        assertEquals(project.tasks.publishApkPaidRelease.variant, project.android.applicationVariants[1])
+            assertEquals(project.tasks.publishApkFreeRelease.variant, project.android.applicationVariants[3])
+            assertEquals(project.tasks.publishApkPaidRelease.variant, project.android.applicationVariants[1])
+        }
     }
 
     @Test
@@ -49,7 +53,9 @@ class PlayPublisherPluginTest {
         Project project = TestHelper.evaluatableProject()
         project.evaluate()
 
-        assertEquals('alpha', project.extensions.findByName("play").track)
+        project.afterEvaluate {
+            assertEquals('alpha', project.extensions.findByName('play').track)
+        }
     }
 
     @Test
@@ -62,7 +68,9 @@ class PlayPublisherPluginTest {
 
         project.evaluate()
 
-        assertEquals('production', project.extensions.findByName("play").track)
+        project.afterEvaluate {
+            assertEquals('production', project.extensions.findByName('play').track)
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -85,8 +93,10 @@ class PlayPublisherPluginTest {
 
         project.evaluate()
 
-        assertNotNull(project.tasks.publishListingFreeRelease)
-        assertNotNull(project.tasks.publishListingPaidRelease)
+        project.afterEvaluate {
+            assertNotNull(project.tasks.publishListingFreeRelease)
+            assertNotNull(project.tasks.publishListingPaidRelease)
+        }
     }
 
 }

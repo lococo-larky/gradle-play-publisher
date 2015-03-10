@@ -46,14 +46,16 @@ public class PlayPublishTaskTest {
         Project project = TestHelper.evaluatableProject()
         project.evaluate()
 
-        // Attach the mock
-        project.tasks.publishApkRelease.service = publisherMock
+        project.afterEvaluate {
+            // Attach the mock
+            project.tasks.publishApkRelease.service = publisherMock
 
-        // finally run the task we want to check
-        project.tasks.publishApkRelease.publish()
+            // finally run the task we want to check
+            project.tasks.publishApkRelease.publish()
 
-        // verify that we init the connection with the correct application id
-        verify(editsMock).insert("com.example.publisher", null)
+            // verify that we init the connection with the correct application id
+            verify(editsMock).insert("com.example.publisher", null)
+        }
     }
 
     @Test
@@ -77,14 +79,16 @@ public class PlayPublishTaskTest {
 
         project.evaluate()
 
-        // Attach the mock
-        project.tasks.publishApkPaidRelease.service = publisherMock
+        project.afterEvaluate {
+            // Attach the mock
+            project.tasks.publishApkPaidRelease.service = publisherMock
 
-        // finally run the task we want to check
-        project.tasks.publishApkPaidRelease.publish()
+            // finally run the task we want to check
+            project.tasks.publishApkPaidRelease.publish()
 
-        // verify that we init the connection with the correct application id
-        verify(editsMock).insert("com.example.publisher.paid.release", null)
+            // verify that we init the connection with the correct application id
+            verify(editsMock).insert("com.example.publisher.paid.release", null)
+        }
     }
 
     @Test
@@ -92,18 +96,20 @@ public class PlayPublishTaskTest {
         Project project = TestHelper.evaluatableProject()
         project.evaluate()
 
-        Pattern pattern = project.tasks.publishApkRelease.matcher
+        project.afterEvaluate {
+            Pattern pattern = project.tasks.publishApkRelease.matcher
 
-        Matcher m = pattern.matcher("de-DE")
-        assertTrue(m.find())
+            Matcher m = pattern.matcher("de-DE")
+            assertTrue(m.find())
 
-        m = pattern.matcher("de")
-        assertTrue(m.find())
+            m = pattern.matcher("de")
+            assertTrue(m.find())
 
-        m = pattern.matcher("es-419")
-        assertTrue(m.find())
+            m = pattern.matcher("es-419")
+            assertTrue(m.find())
 
-        m = pattern.matcher("de_DE")
-        assertFalse(m.find())
+            m = pattern.matcher("de_DE")
+            assertFalse(m.find())
+        }
     }
 }
