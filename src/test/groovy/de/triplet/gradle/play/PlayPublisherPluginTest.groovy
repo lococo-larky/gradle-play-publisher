@@ -75,6 +75,28 @@ class PlayPublisherPluginTest {
     }
 
     @Test
+    public void testValidUserFraction() {
+        Project project = TestHelper.evaluatableProject()
+
+        project.play {
+            userFraction 0.005
+        }
+
+        project.evaluate()
+
+        assertEquals(0.005D, (Double) project.extensions.findByName("play").userFraction, 0.0001D)
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testThrowsOnInvalidUserFraction() {
+        Project project = TestHelper.evaluatableProject()
+
+        project.play {
+            userFraction 0.1234
+        }
+    }
+
+    @Test
     public void testPublishListingTask() {
         Project project = TestHelper.evaluatableProject()
 
