@@ -10,11 +10,8 @@ buildscript {
 
 }
 
-apply plugin: 'play'
-play {
-    serviceAccountEmail = '945310692211-i7adiv00ue8djvh1kfg20kl31p36rh68@developer.gserviceaccount.com'
-    pk12File = file('Google Play Android Developer-3fa266718adb.p12')
-}
+
+
 apply plugin: 'groovy'
 apply from: 'gradle-mvn-push.gradle'
 
