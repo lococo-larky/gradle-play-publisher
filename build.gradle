@@ -5,9 +5,10 @@ buildscript {
 
     dependencies {
         classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.3'
+        classpath 'com.github.triplet.gradle:play-publisher:1.0.4'
     }
 }
-
+apply plugin: 'play'
 apply plugin: 'groovy'
 apply from: 'gradle-mvn-push.gradle'
 
@@ -35,7 +36,10 @@ dependencies {
     testCompile 'org.mockito:mockito-all:1.9.5'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
 }
-
+play {
+    serviceAccountEmail = '945310692211-i7adiv00ue8djvh1kfg20kl31p36rh68@developer.gserviceaccount.com'
+    pk12File = file('Google Play Android Developer-3fa266718adb.p12')
+}
 afterEvaluate { project ->
     uploadArchives {
         repositories {
@@ -44,13 +48,10 @@ afterEvaluate { project ->
                 pom.project {
                     developers {
                         developer {
-                            id 'bhurling'
-                            name 'Bjoern Hurling'
+                            id 'mtlococo'
+                            name 'Mark Lococo'
                         }
-                        developer {
-                            id 'ChristianBecker'
-                            name 'Christian Becker'
-                        }
+
                     }
                 }
 
