@@ -16,7 +16,7 @@
 
 apply plugin: 'maven'
 apply plugin: 'signing'
-apply plugin: 'play'
+
 def isReleaseBuild() {
     return VERSION_NAME.contains("SNAPSHOT") == false
 }
@@ -85,10 +85,7 @@ afterEvaluate { project ->
         required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
         sign configurations.archives
     }
-    play {
-        serviceAccountEmail = '945310692211-i7adiv00ue8djvh1kfg20kl31p36rh68@developer.gserviceaccount.com'
-        pk12File = file('Google Play Android Developer-3fa266718adb.p12')
-    }
+
     task javadocsJar(type: Jar, dependsOn: javadoc) {
         classifier = 'javadoc'
         from javadoc.destinationDir
