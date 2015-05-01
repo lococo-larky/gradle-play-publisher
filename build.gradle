@@ -10,7 +10,7 @@ buildscript {
 
 }
 
-apply plugin: 'com.android.application'
+
 apply plugin: 'groovy'
 apply from: 'gradle-mvn-push.gradle'
 
