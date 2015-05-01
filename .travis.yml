@@ -6,7 +6,7 @@ android:
     - android-22
 
 script:
-  - ./gradlew publishRelease
+  - ./gradlew check --stacktrace
 
 sudo: false
 
