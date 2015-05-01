@@ -11,9 +11,6 @@ buildscript {
 }
 
 
-apply plugin: 'play'
-
-apply plugin: 'com.android.application'
 apply plugin: 'groovy'
 apply from: 'gradle-mvn-push.gradle'
 
@@ -22,18 +19,6 @@ version = VERSION_NAME
 
 sourceCompatibility = JavaVersion.VERSION_1_6
 targetCompatibility = JavaVersion.VERSION_1_6
-android {
-    signingConfigs {
-        release {
-
-        }
-    }
-    buildTypes {
-        release {
-
-        }
-    }
-}
 
 dependencies {
 
@@ -79,8 +64,3 @@ afterEvaluate { project ->
         }
     }
 }
-play {
-    serviceAccountEmail = '945310692211-i7adiv00ue8djvh1kfg20kl31p36rh68@developer.gserviceaccount.com'
-    pk12File = file('Google Play Android Developer-3fa266718adb.p12')
-}
-
